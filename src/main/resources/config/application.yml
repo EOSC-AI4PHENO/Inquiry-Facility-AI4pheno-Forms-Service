@@ -1,0 +1,45 @@
+server:
+  port: 6501
+
+springdoc:
+  api-docs:
+    path: /api/inquiry-facility/forms/v3/api-docs
+
+
+eureka:
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+
+spring:
+  application:
+    name: forms-service
+
+  datasource:
+    url: jdbc:postgresql://10.0.5.230:5432/forms
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      database: postgresql
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: false
+
+flyway:
+  url: jdbc:postgresql://10.0.5.231:5432/forms
+  user: postgres
+  password: postgres
+  locations: classpath:db/migration
